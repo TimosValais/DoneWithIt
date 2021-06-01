@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { Component } from "react";
 import {
   Dimensions,
   StyleSheet,
@@ -7,43 +7,42 @@ import {
   View,
   SafeAreaView,
   Platform,
+  ImageBackground,
+  Image,
+  Button,
 } from "react-native";
 import {
   useDimensions,
   useDeviceOrientation,
 } from "@react-native-community/hooks";
+import HomeScreen from "./homeScreen";
+import LoginScreen from "./loginScreen";
 
-export default function App() {
-  const { landscape } = useDeviceOrientation();
-  return (
-    <View
-      style={{
-        paddingTop: "5%",
-        flex: 1,
-        flexDirection: "row",
-      }}
-    >
-      <View
+class App extends Component {
+  state = {
+    showHomeScreen: true,
+  };
+
+  toggleScreens = (showHomeValue) => {
+    this.setState({ showHomeScreen: !showHomeValue });
+  };
+  render() {
+    return (
+      <SafeAreaView
         style={{
-          backgroundColor: "dodgerblue",
-          width: 100,
-          height: 100,
+          flex: 1,
+          paddingTop: 20,
         }}
-      />
-      <View
-        style={{
-          backgroundColor: "gold",
-          width: 100,
-          height: 100,
-        }}
-      />
-      <View
-        style={{
-          backgroundColor: "tomato",
-          width: 100,
-          height: 100,
-        }}
-      />
-    </View>
-  );
+      >
+        {this.state.showHomeScreen ? <HomeScreen /> : <LoginScreen />}
+
+        <Button
+          title="Toggle Screens"
+          onPress={() => this.toggleScreens(this.state.showHomeScreen)}
+        />
+      </SafeAreaView>
+    );
+  }
 }
+
+export default App;
