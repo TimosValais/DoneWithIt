@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { View, SafeAreaView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./app/components/AppText";
+import AppButton from "./app/components/AppButton";
+import colors from "./app/config/colors";
 
 class App extends Component {
   state = {
@@ -22,7 +24,12 @@ class App extends Component {
           alignItems: "center",
         }}
       >
-        <AppText>I love react native!!</AppText>
+        <AppButton
+          title="LOGIN"
+          onPress={() => console.log("Button Pressed")}
+          buttonColor={colors.primary}
+          textColor={colors.white}
+        />
       </SafeAreaView>
     );
   }
