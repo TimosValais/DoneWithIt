@@ -32,20 +32,22 @@ class App extends Component {
         style={{
           flex: 1,
           paddingTop: 20,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {this.state.showHomeScreen ? <HomeScreen /> : <ViewImageScreen />}
         <View
           style={{
-            position: "absolute",
-            top: "50%",
+            backgroundColor: "dodgerblue",
+            width: 100,
+            height: 100,
+            shadowColor: "grey",
+            shadowOffset: { width: 10, height: 10 },
+            shadowOpacity: 1,
+            shadowRadius: 10,
+            elevation: 20,
           }}
-        >
-          <Button
-            title="Toggle Screens"
-            onPress={() => this.toggleScreens(this.state.showHomeScreen)}
-          />
-        </View>
+        ></View>
       </SafeAreaView>
     );
   }
