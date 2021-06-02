@@ -1,22 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Platform,
-  ImageBackground,
-  Image,
-  Button,
-} from "react-native";
-import {
-  useDimensions,
-  useDeviceOrientation,
-} from "@react-native-community/hooks";
-import HomeScreen from "./app/screens/HomeScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
+import { View, SafeAreaView } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AppText from "./app/components/AppText";
 
 class App extends Component {
   state = {
@@ -32,20 +18,11 @@ class App extends Component {
         style={{
           flex: 1,
           paddingTop: 20,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        {this.state.showHomeScreen ? <HomeScreen /> : <ViewImageScreen />}
-        <View
-          style={{
-            position: "absolute",
-            top: "50%",
-          }}
-        >
-          <Button
-            title="Toggle Screens"
-            onPress={() => this.toggleScreens(this.state.showHomeScreen)}
-          />
-        </View>
+        <AppText>I love react native!!</AppText>
       </SafeAreaView>
     );
   }
