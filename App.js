@@ -15,8 +15,8 @@ import {
   useDimensions,
   useDeviceOrientation,
 } from "@react-native-community/hooks";
-import HomeScreen from "./homeScreen";
-import LoginScreen from "./loginScreen";
+import HomeScreen from "./app/screens/HomeScreen";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
 
 class App extends Component {
   state = {
@@ -34,12 +34,18 @@ class App extends Component {
           paddingTop: 20,
         }}
       >
-        {this.state.showHomeScreen ? <HomeScreen /> : <LoginScreen />}
-
-        <Button
-          title="Toggle Screens"
-          onPress={() => this.toggleScreens(this.state.showHomeScreen)}
-        />
+        {this.state.showHomeScreen ? <HomeScreen /> : <ViewImageScreen />}
+        <View
+          style={{
+            position: "absolute",
+            top: "50%",
+          }}
+        >
+          <Button
+            title="Toggle Screens"
+            onPress={() => this.toggleScreens(this.state.showHomeScreen)}
+          />
+        </View>
       </SafeAreaView>
     );
   }
