@@ -36,33 +36,22 @@ class App extends Component {
           alignItems: "center",
         }}
       >
-        <View
+        <Text
           style={{
-            backgroundColor: "dodgerblue",
-            width: 100,
-            height: 100,
-            padding: 25, //padding Horizontal overrides it
-            paddingHorizontal: 10, //padding Left overrides it
-            paddingLeft: 30,
+            fontFamily: "Roboto",
+            fontSize: 30,
+            fontStyle: "italic",
+            fontWeight: "600",
+            color: "tomato",
+            textTransform: "capitalize",
+            textDecorationLine: "line-through",
+            textAlign: "center",
+            lineHeight: 60,
           }}
         >
-          <View
-            style={{
-              backgroundColor: "gold",
-              width: 50,
-              height: 50,
-            }}
-          ></View>
-        </View>
-        <View
-          style={{
-            backgroundColor: "tomato",
-            width: 100,
-            height: 100,
-            margin: 20, //marginTop overrides it
-            marginTop: 10,
-          }}
-        ></View>
+          I love React Native! This is my first React Native app! Here's some
+          more text.
+        </Text>
       </SafeAreaView>
     );
   }
