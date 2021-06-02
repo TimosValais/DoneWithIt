@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import { View, SafeAreaView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AppText from "./app/components/AppText";
 
 class App extends Component {
   state = {
@@ -21,7 +22,7 @@ class App extends Component {
           alignItems: "center",
         }}
       >
-        <MaterialCommunityIcons name="email" size={200} color="dodgerblue" />
+        <AppText>I love react native!!</AppText>
       </SafeAreaView>
     );
   }
