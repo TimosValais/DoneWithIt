@@ -17,6 +17,7 @@ import {
 } from "@react-native-community/hooks";
 import HomeScreen from "./app/screens/HomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
+import AppText from "./app/components/AppText";
 
 class App extends Component {
   state = {
@@ -36,22 +37,7 @@ class App extends Component {
           alignItems: "center",
         }}
       >
-        <Text
-          style={{
-            fontFamily: "Roboto",
-            fontSize: 30,
-            fontStyle: "italic",
-            fontWeight: "600",
-            color: "tomato",
-            textTransform: "capitalize",
-            textDecorationLine: "line-through",
-            textAlign: "center",
-            lineHeight: 60,
-          }}
-        >
-          I love React Native! This is my first React Native app! Here's some
-          more text.
-        </Text>
+        <AppText>I love React Native!</AppText>
       </SafeAreaView>
     );
   }
