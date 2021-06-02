@@ -1,23 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Platform,
-  ImageBackground,
-  Image,
-  Button,
-} from "react-native";
-import {
-  useDimensions,
-  useDeviceOrientation,
-} from "@react-native-community/hooks";
-import HomeScreen from "./app/screens/HomeScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
-import AppText from "./app/components/AppText";
+import { View, SafeAreaView } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class App extends Component {
   state = {
@@ -37,7 +21,7 @@ class App extends Component {
           alignItems: "center",
         }}
       >
-        <AppText>I love React Native!</AppText>
+        <MaterialCommunityIcons name="email" size={200} color="dodgerblue" />
       </SafeAreaView>
     );
   }
