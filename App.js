@@ -41,11 +41,26 @@ class App extends Component {
             backgroundColor: "dodgerblue",
             width: 100,
             height: 100,
-            shadowColor: "grey",
-            shadowOffset: { width: 10, height: 10 },
-            shadowOpacity: 1,
-            shadowRadius: 10,
-            elevation: 20,
+            padding: 25, //padding Horizontal overrides it
+            paddingHorizontal: 10, //padding Left overrides it
+            paddingLeft: 30,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "gold",
+              width: 50,
+              height: 50,
+            }}
+          ></View>
+        </View>
+        <View
+          style={{
+            backgroundColor: "tomato",
+            width: 100,
+            height: 100,
+            margin: 20, //marginTop overrides it
+            marginTop: 10,
           }}
         ></View>
       </SafeAreaView>
