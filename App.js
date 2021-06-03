@@ -26,7 +26,7 @@ class App extends Component {
       >
         <AppButton
           title="LOGIN"
-          onPress={() => console.log("Button Pressed")}
+          onPress={() => this.toggleScreens()}
           buttonColor={colors.primary}
           textColor={colors.white}
         />
