@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { View, SafeAreaView, Image, Button } from "react-native";
+import {
+  View,
+  SafeAreaView,
+  Image,
+  Button,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./app/components/AppText";
 import AppButton from "./app/components/AppButton";
@@ -31,9 +38,51 @@ class App extends Component {
   };
   toggleImageScreen = () => {
     console.log("Pressed");
-    let result = !this.state.showImageScreen;
-    this.setState({ showImageScreen: result });
+    let imageScreenShow = !this.state.showImageScreen;
+    let homeScreenShow = !this.state.showHomeScreen;
+    this.setState({
+      showHomeScreen: homeScreenShow,
+      showImageScreen: imageScreenShow,
+    });
+    console.log(
+      "this is the showimagescreen state : " + this.state.showImageScreen
+    );
   };
+  handleScreens = () => {
+    if (this.state.showHomeScreen) {
+      return (
+        <HomeScreen
+          loginButtonPress={() =>
+            this.toggleHomeScreen(this.state.showHomeScreen)
+          }
+          registerButtonPress={() => this.toggleImageScreen()}
+        />
+      );
+    } else if (this.state.showImageScreen) {
+      return <ViewImageScreen onClosePress={this.toggleImageScreen} />;
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 / 2 }}>
+            <Card
+              image={require("./app/assets/images/jacket.jpg")}
+              price={"100$"}
+              title="Red Jacket For Sale"
+              subTitle="This is my favorite red jacket!!"
+            />
+          </View>
+          <View style={{ flex: 1 / 2 }}>
+            <Listing
+              image={require("./app/assets/images/mosh.jpg")}
+              name="Mosh Hamedani"
+              noOfListings={5}
+            />
+          </View>
+        </View>
+      );
+    }
+  };
+
   render() {
     return (
       <View
@@ -42,46 +91,25 @@ class App extends Component {
           paddingTop: 20,
         }}
       >
-        <View
+        {this.handleScreens()}
+        <TouchableOpacity
           style={{
             position: "absolute",
             top: "50%",
+            backgroundColor: colors.primary,
+            width: 90,
+            height: 20,
           }}
+          onPress={() => this.backToLogin()}
         >
-          <Button
-            title="Back to login"
-            color={colors.primary}
-            onPress={this.backToLogin}
-          />
-        </View>
-        {this.state.showHomeScreen && !this.state.showImageScreen ? (
-          <HomeScreen
-            loginButtonPress={() =>
-              this.toggleHomeScreen(this.state.showHomeScreen)
-            }
-            registerButtonPress={() => this.toggleImageScreen()}
-          />
-        ) : !this.state.showImageScreen ? (
-          <View style={{ flex: 1 }}>
-            <View style={{ flex: 1 / 2 }}>
-              <Card
-                image={require("./app/assets/images/jacket.jpg")}
-                price={"100$"}
-                title="Red Jacket For Sale"
-                subTitle="This is my favorite red jacket!!"
-              />
-            </View>
-            <View style={{ flex: 1 / 2 }}>
-              <Listing
-                image={require("./app/assets/images/mosh.jpg")}
-                name="Mosh Hamedani"
-                noOfListings={5}
-              />
-            </View>
-          </View>
-        ) : (
-          <ViewImageScreen onClosePress={this.backToLogin} />
-        )}
+          <Text
+            style={{
+              color: colors.white,
+            }}
+          >
+            Back to login
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
