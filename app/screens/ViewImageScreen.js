@@ -1,13 +1,28 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet, Text, Pressable } from "react-native";
 import colors from "../config/colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const LoginScreen = () => {
+const ViewImageScreen = (props) => {
   return (
     <React.Fragment>
       <View style={styles.container}>
-        <View style={styles.closeIcon}></View>
-        <View style={styles.deleteIcon}></View>
+        <Pressable
+          onPress={() => props.onClosePress()}
+          style={styles.closeIcon}
+        >
+          <MaterialCommunityIcons name="close" color={colors.white} size={25} />
+        </Pressable>
+        <Pressable
+          onPress={() => props.onDeletePress()}
+          style={styles.deleteIcon}
+        >
+          <MaterialCommunityIcons
+            name="trash-can-outline"
+            color={colors.white}
+            size={25}
+          />
+        </Pressable>
         <Image
           source={require("../assets/images/chair.jpg")}
           resizeMode="contain"
@@ -29,20 +44,29 @@ const styles = StyleSheet.create({
   },
   closeIcon: {
     position: "absolute",
-    backgroundColor: colors.primary,
     left: "5%",
     top: "2%",
     width: 50,
     height: 50,
+    justifyContent: "center",
   },
   deleteIcon: {
     position: "absolute",
-    backgroundColor: colors.secondary,
     right: "5%",
     top: "2%",
     width: 50,
     height: 50,
+    justifyContent: "center",
   },
 });
 
-export default LoginScreen;
+ViewImageScreen.defaultProps = {
+  onClosePress: () => {
+    console.log("Close Button Pressed");
+  },
+  onDeletePress: () => {
+    console.log("Delete Button Pressed");
+  },
+};
+
+export default ViewImageScreen;

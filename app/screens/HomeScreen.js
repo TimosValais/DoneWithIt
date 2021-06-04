@@ -4,7 +4,7 @@ import colors from "../config/colors";
 import Logo from "../components/Logo";
 import AppButton from "./../components/AppButton";
 
-const HomeScreen = ({ loginButtonPress }) => {
+const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
   return (
     <React.Fragment>
       <ImageBackground
@@ -21,7 +21,7 @@ const HomeScreen = ({ loginButtonPress }) => {
         />
         <AppButton
           title="REGISTER"
-          onPress={() => console.log("Register Button Pressed")}
+          onPress={registerButtonPress}
           textColor={colors.white}
           style={styles.registerButton}
         />

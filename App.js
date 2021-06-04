@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
-import { View, SafeAreaView, Image } from "react-native";
+import { View, SafeAreaView, Image, Button } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./app/components/AppText";
 import AppButton from "./app/components/AppButton";
@@ -8,30 +8,60 @@ import colors from "./app/config/colors";
 import HomeScreen from "./app/screens/HomeScreen";
 import Card from "./app/components/Card";
 import Listing from "./app/components/Listing";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
 
 class App extends Component {
   state = {
     showHomeScreen: true,
+    showImageScreen: false,
+  };
+  backToLogin = () => {
+    this.setState({ showHomeScreen: true, showImageScreen: false });
+    console.log(
+      "Show Home Screen : " +
+        this.state.showHomeScreen +
+        "\nShow Image Screen : " +
+        this.state.showImageScreen
+    );
   };
 
-  toggleScreens = (showHomeValue) => {
+  toggleHomeScreen = (showHomeValue) => {
+    console.log("Pressed Home");
     this.setState({ showHomeScreen: !showHomeValue });
+  };
+  toggleImageScreen = () => {
+    console.log("Pressed");
+    let result = !this.state.showImageScreen;
+    this.setState({ showImageScreen: result });
   };
   render() {
     return (
-      <SafeAreaView
+      <View
         style={{
           flex: 1,
           paddingTop: 20,
         }}
       >
-        {this.state.showHomeScreen ? (
+        <View
+          style={{
+            position: "absolute",
+            top: "50%",
+          }}
+        >
+          <Button
+            title="Back to login"
+            color={colors.primary}
+            onPress={this.backToLogin}
+          />
+        </View>
+        {this.state.showHomeScreen && !this.state.showImageScreen ? (
           <HomeScreen
             loginButtonPress={() =>
-              this.toggleScreens(this.state.showHomeScreen)
+              this.toggleHomeScreen(this.state.showHomeScreen)
             }
+            registerButtonPress={() => this.toggleImageScreen()}
           />
-        ) : (
+        ) : !this.state.showImageScreen ? (
           <View style={{ flex: 1 }}>
             <View style={{ flex: 1 / 2 }}>
               <Card
@@ -49,8 +79,10 @@ class App extends Component {
               />
             </View>
           </View>
+        ) : (
+          <ViewImageScreen onClosePress={this.backToLogin} />
         )}
-      </SafeAreaView>
+      </View>
     );
   }
 }
