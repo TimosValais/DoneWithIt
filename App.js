@@ -22,7 +22,7 @@ import Listing from "./app/components/Listing";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import MessageScreen from "./app/screens/MessageScreen";
+import MessagesScreen from "./app/screens/MessagesScreen";
 
 class App extends Component {
   state = {
@@ -75,7 +75,7 @@ class App extends Component {
     } else if (this.state.showImageScreen) {
       return <ViewImageScreen onClosePress={this.toggleImageScreen} />;
     } else if (this.state.showMessagesScreen) {
-      return <MessageScreen />;
+      return <MessagesScreen />;
     } else {
       return (
         <ListingDetailsScreen

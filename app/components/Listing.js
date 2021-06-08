@@ -3,22 +3,36 @@ import {
   Image,
   StyleSheet,
   Text,
+  TouchableHighlight,
+  TouchableOpacity,
   useWindowDimensions,
   View,
 } from "react-native";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 import colors from "../config/colors";
 
-const Listing = ({ image, title, subtitle }) => {
+const Listing = ({
+  image,
+  title,
+  subtitle,
+  onPress,
+  renderRightActions,
+  renderLeftActions,
+}) => {
   return (
-    <View style={styles.background}>
-      <View style={styles.container}>
-        <Image style={styles.image} source={image} resizeMode="contain" />
-        <View style={styles.description}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subTitle}>{subtitle}</Text>
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+        <View style={styles.background}>
+          <View style={styles.container}>
+            <Image style={styles.image} source={image} resizeMode="contain" />
+            <View style={styles.description}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.subTitle}>{subtitle}</Text>
+            </View>
+          </View>
         </View>
-      </View>
-    </View>
+      </TouchableHighlight>
+    </Swipeable>
   );
 };
 
@@ -31,7 +45,7 @@ const styles = StyleSheet.create({
     flex: 1 / 5,
     flexDirection: "row",
     overflow: "hidden",
-    padding: 20,
+    padding: 15,
     alignItems: "center",
   },
   image: {
