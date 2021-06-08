@@ -8,14 +8,14 @@ import {
 } from "react-native";
 import colors from "../config/colors";
 
-const Listing = ({ image, name, noOfListings }) => {
+const Listing = ({ image, title, subtitle }) => {
   return (
     <View style={styles.background}>
       <View style={styles.container}>
         <Image style={styles.image} source={image} resizeMode="contain" />
         <View style={styles.description}>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.listings}>{noOfListings} Listings</Text>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.subTitle}>{subtitle}</Text>
         </View>
       </View>
     </View>
@@ -39,19 +39,18 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     height: "100%",
     width: "100%",
+    marginRight: 12,
   },
   description: {
     flex: 2 / 5,
     flexDirection: "column",
   },
-  name: {
-    flex: 1 / 4,
+  title: {
     fontWeight: "bold",
     fontSize: 14,
     color: colors.black,
   },
-  listings: {
-    flex: 1 / 4,
+  subTitle: {
     color: colors.lightGrey,
     fontSize: 14,
   },

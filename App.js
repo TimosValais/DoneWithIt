@@ -2,13 +2,17 @@ import { StatusBar } from "expo-status-bar";
 import React, { Component } from "react";
 import {
   View,
-  SafeAreaView,
+  StyleSheet,
   Image,
   Button,
   TouchableOpacity,
   Text,
+  Pressable,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Constants from "expo-constants";
+
+import Screen from "./app/components/Screen";
+import { Feather } from "@expo/vector-icons";
 import AppText from "./app/components/AppText";
 import AppButton from "./app/components/AppButton";
 import colors from "./app/config/colors";
@@ -16,19 +20,29 @@ import HomeScreen from "./app/screens/HomeScreen";
 import Card from "./app/components/Card";
 import Listing from "./app/components/Listing";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
+import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import MessageScreen from "./app/screens/MessageScreen";
 
 class App extends Component {
   state = {
     showHomeScreen: true,
     showImageScreen: false,
+    showMessagesScreen: false,
   };
   backToLogin = () => {
-    this.setState({ showHomeScreen: true, showImageScreen: false });
+    this.setState({
+      showHomeScreen: true,
+      showImageScreen: false,
+      showMessagesScreen: false,
+    });
     console.log(
       "Show Home Screen : " +
         this.state.showHomeScreen +
         "\nShow Image Screen : " +
-        this.state.showImageScreen
+        this.state.showImageScreen +
+        "\nShow Messages Screen : " +
+        this.state.showMessagesScreen
     );
   };
 
@@ -60,38 +74,47 @@ class App extends Component {
       );
     } else if (this.state.showImageScreen) {
       return <ViewImageScreen onClosePress={this.toggleImageScreen} />;
+    } else if (this.state.showMessagesScreen) {
+      return <MessageScreen />;
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <View style={{ flex: 1 / 2 }}>
-            <Card
-              image={require("./app/assets/images/jacket.jpg")}
-              price={"100$"}
-              title="Red Jacket For Sale"
-              subTitle="This is my favorite red jacket!!"
-            />
-          </View>
-          <View style={{ flex: 1 / 2 }}>
-            <Listing
-              image={require("./app/assets/images/mosh.jpg")}
-              name="Mosh Hamedani"
-              noOfListings={5}
-            />
-          </View>
-        </View>
+        <ListingDetailsScreen
+          cardImage={require("./app/assets/images/jacket.jpg")}
+          cardTitle="Red Jacket For Sale"
+          cardSubtitle="This is my favorite red jacket!!"
+          cardPrice="100$"
+          listingImage={require("./app/assets/images/mosh.jpg")}
+          listingTitle="Mosh Hamedani"
+          listingSubTitle="5 Listings"
+        />
       );
     }
+  };
+  showMessages = (messagesShown) => {
+    console.log("This is messagesShown : " + messagesShown);
+    if (messagesShown) {
+      this.backToLogin();
+      return;
+    }
+    this.setState({
+      showHomeScreen: false,
+      showMessagesScreen: true,
+    });
   };
 
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          paddingTop: 20,
-        }}
-      >
+      <Screen>
         {this.handleScreens()}
+
+        {this.state.showImageScreen ? null : (
+          <TouchableOpacity
+            style={styles.messageIcon}
+            onPress={() => this.showMessages(this.state.showMessagesScreen)}
+          >
+            <Feather name="message-circle" size={25} color={colors.black} />
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={{
             position: "absolute",
@@ -110,9 +133,22 @@ class App extends Component {
             Back to login
           </Text>
         </TouchableOpacity>
-      </View>
+      </Screen>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  messageIcon: {
+    position: "absolute",
+    top: "7%",
+    right: "7%",
+    backgroundColor: colors.transparent,
+    height: 40,
+    width: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default App;

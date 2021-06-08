@@ -7,13 +7,13 @@ const ViewImageScreen = ({ onClosePress, onDeletePress, randomText }) => {
   return (
     <View style={styles.container}>
       <Pressable onPress={() => onClosePress()} style={styles.closeIcon}>
-        <MaterialCommunityIcons name="close" color={colors.white} size={25} />
+        <MaterialCommunityIcons name="close" color={colors.white} size={30} />
       </Pressable>
       <Pressable onPress={() => onDeletePress()} style={styles.deleteIcon}>
         <MaterialCommunityIcons
           name="trash-can-outline"
           color={colors.white}
-          size={25}
+          size={30}
         />
       </Pressable>
       <Image
