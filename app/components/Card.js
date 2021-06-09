@@ -5,7 +5,9 @@ import colors from "../config/colors";
 const Card = ({ title, subTitle, image, price }) => {
   return (
     <View style={styles.background}>
-      <Image source={image} style={styles.image} resizeMode="cover" />
+      <View style={styles.imageContainer}>
+        <Image source={image} style={styles.image} resizeMode="cover" />
+      </View>
       <View style={styles.description}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.subTitle}>{subTitle}</Text>
@@ -17,20 +19,21 @@ const Card = ({ title, subTitle, image, price }) => {
 
 const styles = StyleSheet.create({
   background: {
-    flex: 1,
     backgroundColor: colors.white,
-    borderRadius: 10,
+    borderRadius: 15,
     margin: 20,
   },
   description: {
-    flex: 1,
+    flex: 1 / 2,
     margin: 5,
     padding: 5,
+  },
+  imageContainer: {
+    height: 200,
   },
   image: {
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    flex: 5 / 2,
     height: "100%",
     width: "100%",
   },

@@ -12,7 +12,7 @@ import {
 import Constants from "expo-constants";
 
 import Screen from "./app/components/Screen";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./app/components/AppText";
 import AppButton from "./app/components/AppButton";
 import colors from "./app/config/colors";
@@ -23,18 +23,39 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
+import MyAccountScreen from "./app/screens/MyAccountScreen";
+import MainScreen from "./app/screens/MainScreen";
+
+const cards = [
+  {
+    id: "asdf-g63y-g5sr-df34",
+    title: "Couch in great condition",
+    subTitle: "Only 2 years old!!",
+    price: "$1000",
+    image: require("./app/assets/images/couch.jpg"),
+  },
+  {
+    id: "s3df-2342-dgq8-912d",
+    title: "Red Jacket for sale",
+    subTitle: "Awesome Jacket!!",
+    price: "$100",
+    image: require("./app/assets/images/jacket.jpg"),
+  },
+];
 
 class App extends Component {
   state = {
     showHomeScreen: true,
     showImageScreen: false,
     showMessagesScreen: false,
+    showProfile: false,
   };
   backToLogin = () => {
     this.setState({
       showHomeScreen: true,
       showImageScreen: false,
       showMessagesScreen: false,
+      showProfile: false,
     });
     console.log(
       "Show Home Screen : " +
@@ -42,7 +63,9 @@ class App extends Component {
         "\nShow Image Screen : " +
         this.state.showImageScreen +
         "\nShow Messages Screen : " +
-        this.state.showMessagesScreen
+        this.state.showMessagesScreen +
+        "\nShow Profile Screen : " +
+        this.state.showProfile
     );
   };
 
@@ -76,18 +99,19 @@ class App extends Component {
       return <ViewImageScreen onClosePress={this.toggleImageScreen} />;
     } else if (this.state.showMessagesScreen) {
       return <MessagesScreen />;
-    } else {
+    } else if (this.state.showProfile) {
       return (
-        <ListingDetailsScreen
-          cardImage={require("./app/assets/images/jacket.jpg")}
-          cardTitle="Red Jacket For Sale"
-          cardSubtitle="This is my favorite red jacket!!"
-          cardPrice="100$"
-          listingImage={require("./app/assets/images/mosh.jpg")}
-          listingTitle="Mosh Hamedani"
-          listingSubTitle="5 Listings"
+        <MyAccountScreen
+          title="Mosh Hamedani"
+          subTitle="Was it that simple?"
+          image={require("./app/assets/images/mosh.jpg")}
+          onPress={() => console.log("Button Pressed! : ")}
+          renderRightAction={() => console.log("Swiped Left!")}
+          renderLeftAction={() => console.log("Swiped Right")}
         />
       );
+    } else {
+      return <MainScreen data={cards} />;
     }
   };
   showMessages = (messagesShown) => {
@@ -101,13 +125,24 @@ class App extends Component {
       showMessagesScreen: true,
     });
   };
+  showProfile = (profileShown) => {
+    console.log("This is profileShown : " + profileShown);
+    if (profileShown) {
+      this.backToLogin();
+      return;
+    }
+    this.setState({
+      showHomeScreen: false,
+      showProfile: true,
+    });
+  };
 
   render() {
     return (
       <Screen>
         {this.handleScreens()}
 
-        {this.state.showImageScreen ? null : (
+        {this.state.showImageScreen || this.state.showProfile ? null : (
           <TouchableOpacity
             style={styles.messageIcon}
             onPress={() => this.showMessages(this.state.showMessagesScreen)}
@@ -115,14 +150,22 @@ class App extends Component {
             <Feather name="message-circle" size={25} color={colors.black} />
           </TouchableOpacity>
         )}
+        {this.state.showImageScreen || this.state.showMessagesScreen ? null : (
+          <TouchableOpacity
+            style={
+              this.state.showProfile ? styles.messageIcon : styles.profileIcon
+            }
+            onPress={() => this.showProfile(this.state.showProfile)}
+          >
+            <MaterialCommunityIcons
+              name="face-profile"
+              size={25}
+              color={colors.black}
+            />
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
-          style={{
-            position: "absolute",
-            top: "50%",
-            backgroundColor: colors.primary,
-            width: 90,
-            height: 20,
-          }}
+          style={styles.backToLogin}
           onPress={() => this.backToLogin()}
         >
           <Text
@@ -148,6 +191,23 @@ const styles = StyleSheet.create({
     width: 40,
     justifyContent: "center",
     alignItems: "center",
+  },
+  profileIcon: {
+    position: "absolute",
+    top: "7%",
+    left: "7%",
+    backgroundColor: colors.transparent,
+    height: 40,
+    width: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  backToLogin: {
+    position: "absolute",
+    top: "50%",
+    backgroundColor: colors.primary,
+    width: 90,
+    height: 20,
   },
 });
 

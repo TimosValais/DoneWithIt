@@ -6,7 +6,7 @@ import AppButton from "./../components/AppButton";
 
 const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
   return (
-    <React.Fragment>
+    <>
       <ImageBackground
         source={require("../assets/images/background.jpg")}
         resizeMode="stretch"
@@ -27,7 +27,7 @@ const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
         />
         <Logo />
       </ImageBackground>
-    </React.Fragment>
+    </>
   );
 };
 

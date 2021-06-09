@@ -27,6 +27,8 @@ const ListingDetailsScreen = ({
           image={listingImage}
           title={listingTitle}
           subtitle={listingSubTitle}
+          renderRightActions={() => console.log("Swiped")}
+          onPress={() => console.log("Pressed")}
         />
       </View>
     </View>

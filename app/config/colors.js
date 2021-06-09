@@ -8,4 +8,5 @@ export default {
   light: "#f8f4f4",
   danger: "#ff5252",
   transparent: "rgba(255,255,255,0)",
+  warning: "#ffe66d",
 };
