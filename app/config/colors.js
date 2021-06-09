@@ -9,4 +9,5 @@ export default {
   danger: "#ff5252",
   transparent: "rgba(255,255,255,0)",
   warning: "#ffe66d",
+  dark: "#0c0c0c",
 };

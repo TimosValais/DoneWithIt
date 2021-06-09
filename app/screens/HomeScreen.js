@@ -1,10 +1,22 @@
-import React from "react";
-import { Text, View, ImageBackground, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import {
+  Text,
+  View,
+  ImageBackground,
+  Image,
+  StyleSheet,
+  TextInput,
+  Switch,
+} from "react-native";
 import colors from "../config/colors";
 import Logo from "../components/Logo";
 import AppButton from "./../components/AppButton";
+import AppTextInput from "../components/AppTextInput";
+import AppPicker from "../components/AppPicker";
 
 const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
+  const [firstName, setFirstName] = useState("");
+  const [isNew, setIsNew] = useState(false);
   return (
     <>
       <ImageBackground
@@ -13,6 +25,12 @@ const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
         style={styles.background}
         blurRadius={1.5}
       >
+        <AppPicker placeholder="GoodEvening" icon="logout" />
+        <AppTextInput placeholder="Username" icon="email" />
+        <Switch
+          value={isNew}
+          onValueChange={(newValue) => setIsNew(newValue)}
+        />
         <AppButton
           title="LOGIN"
           onPress={loginButtonPress}
@@ -25,6 +43,7 @@ const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
           textColor={colors.white}
           style={styles.registerButton}
         />
+
         <Logo />
       </ImageBackground>
     </>
@@ -52,6 +71,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 12,
     margin: 6,
+  },
+  input: {
+    width: "100%",
+    borderBottomWidth: 1,
+    borderBottomColor: colors.black,
   },
 });
 
