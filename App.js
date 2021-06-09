@@ -25,6 +25,8 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import MyAccountScreen from "./app/screens/MyAccountScreen";
 import MainScreen from "./app/screens/MainScreen";
+import AccountScreen from "./app/screens/AccountScreen";
+import ListingScreen from "./app/screens/ListingScreen";
 
 const cards = [
   {
@@ -100,18 +102,9 @@ class App extends Component {
     } else if (this.state.showMessagesScreen) {
       return <MessagesScreen />;
     } else if (this.state.showProfile) {
-      return (
-        <MyAccountScreen
-          title="Mosh Hamedani"
-          subTitle="Was it that simple?"
-          image={require("./app/assets/images/mosh.jpg")}
-          onPress={() => console.log("Button Pressed! : ")}
-          renderRightAction={() => console.log("Swiped Left!")}
-          renderLeftAction={() => console.log("Swiped Right")}
-        />
-      );
+      return <AccountScreen />;
     } else {
-      return <MainScreen data={cards} />;
+      return <ListingScreen />;
     }
   };
   showMessages = (messagesShown) => {
@@ -139,7 +132,7 @@ class App extends Component {
 
   render() {
     return (
-      <Screen>
+      <Screen style={{ backgroundColor: colors.lightGrey, flex: 1 }}>
         {this.handleScreens()}
 
         {this.state.showImageScreen || this.state.showProfile ? null : (
