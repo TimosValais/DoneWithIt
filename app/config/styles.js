@@ -9,4 +9,12 @@ export default {
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
     color: colors.dark,
   },
+  appLoginButton: {
+    backgroundColor: colors.primary,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    borderRadius: 50,
+    height: 40,
+  },
 };

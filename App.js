@@ -27,6 +27,7 @@ import MyAccountScreen from "./app/screens/MyAccountScreen";
 import MainScreen from "./app/screens/MainScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingScreen from "./app/screens/ListingScreen";
+import LoginScreen from "./app/screens/LoginScreen";
 
 const cards = [
   {
@@ -104,7 +105,7 @@ class App extends Component {
     } else if (this.state.showProfile) {
       return <AccountScreen />;
     } else {
-      return <ListingScreen />;
+      return <LoginScreen />;
     }
   };
   showMessages = (messagesShown) => {
