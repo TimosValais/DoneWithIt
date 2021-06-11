@@ -14,8 +14,15 @@ import AppButton from "./../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import AppPicker from "../components/AppPicker";
 
+const categories = [
+  { label: "Furniture", value: 1 },
+  { label: "Clothing", value: 2 },
+  { label: "Cameras", value: 3 },
+];
+
 const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
   const [firstName, setFirstName] = useState("");
+  const [category, setCategory] = useState();
   const [isNew, setIsNew] = useState(false);
   return (
     <>
@@ -25,7 +32,13 @@ const HomeScreen = ({ loginButtonPress, registerButtonPress }) => {
         style={styles.background}
         blurRadius={1.5}
       >
-        <AppPicker placeholder="GoodEvening" icon="logout" />
+        <AppPicker
+          selectedItem={category}
+          onSelectItem={(category) => setCategory(category)}
+          items={categories}
+          placeholder="Choose a category"
+          icon="logout"
+        />
         <AppTextInput placeholder="Username" icon="email" />
         <Switch
           value={isNew}

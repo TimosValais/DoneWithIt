@@ -3,8 +3,8 @@ import { Text, Platform, StyleSheet } from "react-native";
 
 import defaultStyles from "../config/styles";
 
-function AppText({ children }) {
-  return <Text style={defaultStyles.text}>{children}</Text>;
+function AppText({ children, style }) {
+  return <Text style={[defaultStyles.text, style]}>{children}</Text>;
 }
 
 export default AppText;
