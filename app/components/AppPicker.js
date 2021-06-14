@@ -36,7 +36,9 @@ function AppPicker({
               color={defaultStyles.colors.medium}
             />
           )}
-          <AppText style={styles.text}>
+          <AppText
+            style={selectedItem ? styles.text : defaultStyles.placeholder}
+          >
             {selectedItem ? selectedItem.label : placeholder}
           </AppText>
           <MaterialCommunityIcons

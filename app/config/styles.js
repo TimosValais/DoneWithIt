@@ -17,4 +17,8 @@ export default {
     borderRadius: 50,
     height: 40,
   },
+  placeholder: {
+    fontWeight: "100",
+    color: colors.mediumGrey,
+  },
 };

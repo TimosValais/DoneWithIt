@@ -28,6 +28,8 @@ import MainScreen from "./app/screens/MainScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingScreen from "./app/screens/ListingScreen";
 import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 const cards = [
   {
@@ -99,9 +101,9 @@ class App extends Component {
         />
       );
     } else if (this.state.showImageScreen) {
-      return <ViewImageScreen onClosePress={this.toggleImageScreen} />;
+      return <RegisterScreen />;
     } else if (this.state.showMessagesScreen) {
-      return <MessagesScreen />;
+      return <ListingEditScreen />;
     } else if (this.state.showProfile) {
       return <AccountScreen />;
     } else {
@@ -141,7 +143,11 @@ class App extends Component {
             style={styles.messageIcon}
             onPress={() => this.showMessages(this.state.showMessagesScreen)}
           >
-            <Feather name="message-circle" size={25} color={colors.black} />
+            <MaterialCommunityIcons
+              name="plus"
+              size={25}
+              color={colors.black}
+            />
           </TouchableOpacity>
         )}
         {this.state.showImageScreen || this.state.showMessagesScreen ? null : (

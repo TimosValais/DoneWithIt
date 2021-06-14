@@ -27,7 +27,7 @@ function AppFormField({ name, style, ...otherProps }) {
 }
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
+    maxHeight: 100,
   },
 });
 export default AppFormField;
