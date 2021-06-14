@@ -14,6 +14,7 @@ import colors from "../config/colors";
 import defaultStyles from "./../config/styles";
 import AppText from "./AppText";
 import PickerItem from "./PickerItem";
+import Icon from "./Icon";
 
 function AppPicker({
   selectedItem,
@@ -21,13 +22,14 @@ function AppPicker({
   icon,
   items,
   placeholder,
+  pickerIcon,
   ...otherProps
 }) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
-        <View style={styles.container}>
+        <View style={[styles.container, otherProps.style]}>
           {icon && (
             <MaterialCommunityIcons
               name={icon}
@@ -36,9 +38,7 @@ function AppPicker({
               color={defaultStyles.colors.medium}
             />
           )}
-          <AppText
-            style={selectedItem ? styles.text : defaultStyles.placeholder}
-          >
+          <AppText style={selectedItem ? styles.text : defaultStyles.text}>
             {selectedItem ? selectedItem.label : placeholder}
           </AppText>
           <MaterialCommunityIcons
@@ -51,18 +51,30 @@ function AppPicker({
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType="slide">
         <FlatList
+          horizontal={otherProps.horizontal ? otherProps.horizontal : false}
           data={items}
           keyExtractor={(item) => item.value.toString()}
           renderItem={({ item }) => (
-            <PickerItem
-              label={item.label}
-              onPress={() => {
-                setModalVisible(false);
-                onSelectItem(item);
-              }}
-            />
+            <View style={otherProps.listStyle ? otherProps.listStyle : null}>
+              {item.pickerIcon && (
+                <Icon
+                  title={item.pickerIcon.title}
+                  backgroundColor={item.pickerIcon.backgroundColor}
+                  color={item.pickerIcon.color}
+                  size={item.pickerIcon.size}
+                />
+              )}
+              <PickerItem
+                label={item.label}
+                onPress={() => {
+                  setModalVisible(false);
+                  onSelectItem(item);
+                }}
+              />
+            </View>
           )}
         />
+
         <Button title="close" onPress={() => setModalVisible(false)} />
       </Modal>
     </>

@@ -12,7 +12,7 @@ function PickerItem({ label, onPress }) {
 
 const styles = StyleSheet.create({
   text: {
-    padding: 20,
+    padding: 5,
   },
 });
 

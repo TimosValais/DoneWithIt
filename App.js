@@ -50,15 +50,16 @@ const cards = [
 
 class App extends Component {
   state = {
-    showHomeScreen: true,
-    showImageScreen: false,
+    showRegisterScreen: false,
     showMessagesScreen: false,
     showProfile: false,
+    showLoginScreen: false,
+    showListingScreen: false,
   };
   backToLogin = () => {
     this.setState({
       showHomeScreen: true,
-      showImageScreen: false,
+      showRegisterScreen: false,
       showMessagesScreen: false,
       showProfile: false,
     });
@@ -66,7 +67,7 @@ class App extends Component {
       "Show Home Screen : " +
         this.state.showHomeScreen +
         "\nShow Image Screen : " +
-        this.state.showImageScreen +
+        this.state.showRegisterScreen +
         "\nShow Messages Screen : " +
         this.state.showMessagesScreen +
         "\nShow Profile Screen : " +
@@ -80,36 +81,57 @@ class App extends Component {
   };
   toggleImageScreen = () => {
     console.log("Pressed");
-    let imageScreenShow = !this.state.showImageScreen;
+    console.log(this.state);
+    let imageScreenShow = !this.state.showRegisterScreen;
     let homeScreenShow = !this.state.showHomeScreen;
     this.setState({
       showHomeScreen: homeScreenShow,
-      showImageScreen: imageScreenShow,
+      showRegisterScreen: imageScreenShow,
     });
     console.log(
-      "this is the showimagescreen state : " + this.state.showImageScreen
+      "this is the showRegisterScreen state : " + this.state.showRegisterScreen
     );
   };
+
+  toggleScreens = (screen) => {
+    Object.entries(this.state).forEach(([key, value]) => {
+      if (key !== screen) this.setState({ [key]: false });
+      if (screen !== "showHomeScreen" && key === screen) {
+        this.setState({ [key]: !value });
+      }
+    });
+  };
   handleScreens = () => {
-    if (this.state.showHomeScreen) {
+    if (this.state.showLoginScreen) {
+      return <LoginScreen />;
+    } else if (this.state.showRegisterScreen) {
       return (
-        <HomeScreen
-          loginButtonPress={() =>
-            this.toggleHomeScreen(this.state.showHomeScreen)
-          }
-          registerButtonPress={() => this.toggleImageScreen()}
-        />
+        <>
+          <RegisterScreen />
+          <Button
+            title="console.log"
+            onPress={() =>
+              console.log("The state now is : " + JSON.stringify(this.state))
+            }
+          />
+        </>
       );
-    } else if (this.state.showImageScreen) {
-      return <RegisterScreen />;
     } else if (this.state.showMessagesScreen) {
+      return <MessagesScreen />;
+    } else if (this.state.showListingScreen) {
       return <ListingEditScreen />;
     } else if (this.state.showProfile) {
       return <AccountScreen />;
     } else {
-      return <LoginScreen />;
+      return (
+        <HomeScreen
+          loginButtonPress={() => this.toggleScreens("showLoginScreen")}
+          registerButtonPress={() => this.toggleScreens("showRegisterScreen")}
+        />
+      );
     }
   };
+
   showMessages = (messagesShown) => {
     console.log("This is messagesShown : " + messagesShown);
     if (messagesShown) {
@@ -138,24 +160,24 @@ class App extends Component {
       <Screen style={{ backgroundColor: colors.lightGrey, flex: 1 }}>
         {this.handleScreens()}
 
-        {this.state.showImageScreen || this.state.showProfile ? null : (
+        {this.state.showRegisterScreen ||
+        this.state.showProfile ||
+        this.state.showListingScreen ? null : (
           <TouchableOpacity
             style={styles.messageIcon}
-            onPress={() => this.showMessages(this.state.showMessagesScreen)}
+            onPress={() => this.toggleScreens("showMessagesScreen")}
           >
-            <MaterialCommunityIcons
-              name="plus"
-              size={25}
-              color={colors.black}
-            />
+            <Feather name="message-circle" size={25} color={colors.black} />
           </TouchableOpacity>
         )}
-        {this.state.showImageScreen || this.state.showMessagesScreen ? null : (
+        {this.state.showRegisterScreen ||
+        this.state.showMessagesScreen ||
+        this.state.showListingScreen ? null : (
           <TouchableOpacity
             style={
               this.state.showProfile ? styles.messageIcon : styles.profileIcon
             }
-            onPress={() => this.showProfile(this.state.showProfile)}
+            onPress={() => this.toggleScreens("showProfile")}
           >
             <MaterialCommunityIcons
               name="face-profile"
@@ -164,9 +186,29 @@ class App extends Component {
             />
           </TouchableOpacity>
         )}
+
+        {this.state.showRegisterScreen ||
+        this.state.showMessagesScreen ||
+        this.state.showProfile ? null : (
+          <TouchableOpacity
+            style={
+              this.state.showListingScreen
+                ? styles.messageIcon
+                : styles.listingIcon
+            }
+            onPress={() => this.toggleScreens("showListingScreen")}
+          >
+            <MaterialCommunityIcons
+              name="plus"
+              size={25}
+              color={colors.black}
+            />
+          </TouchableOpacity>
+        )}
+
         <TouchableOpacity
           style={styles.backToLogin}
-          onPress={() => this.backToLogin()}
+          onPress={() => this.toggleScreens("Home")}
         >
           <Text
             style={{
@@ -196,6 +238,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: "7%",
     left: "7%",
+    backgroundColor: colors.transparent,
+    height: 40,
+    width: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  listingIcon: {
+    position: "absolute",
+    top: "7%",
+    right: "45%",
     backgroundColor: colors.transparent,
     height: 40,
     width: 40,

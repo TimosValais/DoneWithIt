@@ -5,6 +5,7 @@ import Screen from "./../components/Screen";
 import * as Yup from "yup";
 import { AppForm, AppFormField, SubmitButton } from "../components/Forms";
 import AppFormPicker from "../components/Forms/AppFormPicker";
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(2).label("Title"),
@@ -13,9 +14,126 @@ const validationSchema = Yup.object().shape({
 });
 
 const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Cameras", value: 3 },
+  {
+    label: "Furniture",
+    value: 1,
+    pickerIcon: {
+      title: "floor-lamp",
+      backgroundColor: "#fc5c65",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Clothing",
+    value: 2,
+    pickerIcon: {
+      title: "shoe-heel",
+      backgroundColor: "#2bcbba",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 3,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 4,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 5,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 6,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 7,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 8,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 9,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 10,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 11,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
+  {
+    label: "Cameras",
+    value: 12,
+    pickerIcon: {
+      title: "camera",
+      backgroundColor: "#fed330",
+      color: colors.white,
+      size: 75,
+    },
+  },
 ];
 
 function ListingEditScreen(props) {
@@ -39,6 +157,7 @@ function ListingEditScreen(props) {
           placeholder="Title"
         />
         <AppFormField
+          style={{ width: "25%" }}
           maxLength={8}
           name="price"
           autoCapitalize="none"
@@ -46,9 +165,16 @@ function ListingEditScreen(props) {
           placeholder="Price"
         />
         <AppFormPicker
+          style={{ width: "50%" }}
           placeholder="Category"
           items={categories}
           name="category"
+          listStyle={{
+            flexDirection: "column",
+            alignItems: "center",
+            padding: 20,
+          }}
+          horizontal={true}
         />
         <AppFormField
           maxLength={255}

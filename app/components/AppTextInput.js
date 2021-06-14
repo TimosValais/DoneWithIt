@@ -6,7 +6,7 @@ import defaultStyles from "./../config/styles";
 
 function AppTextInput({ icon, ...otherProps }) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, otherProps.style]}>
       {icon && (
         <MaterialCommunityIcons
           name={icon}
